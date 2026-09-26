@@ -51,7 +51,7 @@ npm run dev
 📜 Available Scripts
 In the project directory, you can run the following scripts provided by Vite:
 
-    npm run dev: Starts the development server with Hot Module Replacement (HMR).
+    npm run start: Starts the development server with Hot Module Replacement (HMR).
 
     npm run build: Builds the app for production to the dist folder. It bundles React in production mode and optimizes the build for the best performance.
 
