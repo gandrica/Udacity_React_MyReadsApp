@@ -17,7 +17,7 @@ function Book({ book, onUpdateBook }) {
           <BookShelfChanger book={book} onUpdateBook={onUpdateBook} />
         </div>
         <div className="book-title">{title}</div>
-        <div className="book-authors">{authors.join(", ")}</div>
+        <div className="book-authors">{authors?.join(", ")}</div>
       </div>
     </li>
   );

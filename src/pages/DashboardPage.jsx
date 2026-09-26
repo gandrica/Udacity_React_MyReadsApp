@@ -1,36 +1,14 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Bookshelf from "../components/Bookshelf";
-import { getAll } from "../api/BooksAPI";
 
-function DashboardPage() {
-  const [listBooks, setListBooks] = useState([]);
-  const currentlyReadingBooks = listBooks.filter(
+function DashboardPage({ list, onUpdateBook }) {
+  const currentlyReadingBooks = list.filter(
     (b) => b.shelf === "currentlyReading",
   );
-  const wantToReadBooks = listBooks.filter((b) => b.shelf === "wantToRead");
-  const readBooks = listBooks.filter((b) => b.shelf === "read");
+  const wantToReadBooks = list.filter((b) => b.shelf === "wantToRead");
+  const readBooks = list.filter((b) => b.shelf === "read");
   const navigate = useNavigate();
 
-  const changeBookShelf = (bookToUpdate, newShelf) => {
-    bookToUpdate.shelf = newShelf;
-
-    setListBooks((prevBooks) => {
-      return prevBooks
-        .filter((book) => book.id !== bookToUpdate.id)
-        .concat(bookToUpdate);
-    });
-  };
-
-  useEffect(() => {
-    const getAllBooks = async () => {
-      const books = await getAll();
-      setListBooks(books);
-    };
-    getAllBooks();
-  }, []);
-
-  console.log(listBooks);
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -39,17 +17,17 @@ function DashboardPage() {
       <div className="list-books-content">
         <div>
           <Bookshelf
-            onUpdateBook={changeBookShelf}
+            onUpdateBook={onUpdateBook}
             list={currentlyReadingBooks}
             title="Currently Reading"
           />
           <Bookshelf
-            onUpdateBook={changeBookShelf}
+            onUpdateBook={onUpdateBook}
             list={wantToReadBooks}
             title="Want to Read"
           />
           <Bookshelf
-            onUpdateBook={changeBookShelf}
+            onUpdateBook={onUpdateBook}
             list={readBooks}
             title="Read"
           />

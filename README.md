@@ -1,94 +1,73 @@
-# MyReads Project
+# MyReads: A Book Tracking App
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+MyReads is a React application that allows you to select and categorize books you have read, are currently reading, or want to read. The project leverages React's component-based architecture and state management to provide a seamless, interactive user experience.
 
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) to bootstrap the project.
+## 🚀 Features
 
-## TL;DR
+- **Book Shelves:** Organize your books into three distinct categories:
+  - _Currently Reading_
+  - _Want to Read_
+  - _Read_
+- **Real-time Updates:** Move books between shelves using a dropdown menu, with immediate UI updates.
+- **Search Functionality:** Search for new books via an API and add them to your collection.
+- **Client-Side Routing:** Smooth navigation between the dashboard and the search page without reloading the browser.
 
-To get started developing right away:
+## 🛠️ Built With
 
-- install all project dependencies with `npm install`
-- start the development server with `npm start`
+- [React](https://react.dev/) (v19) - JavaScript library for building user interfaces
+- [React Router](https://reactrouter.com/) (v7) - Declarative routing for React applications
+- [Vite](https://vitejs.dev/) - Next-generation frontend tooling for ultra-fast builds and hot module replacement (HMR)
 
-## What You're Getting
+## 🏁 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+You need Node.js and a package manager (npm, yarn, or pnpm) installed on your computer.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/gandrica/Udacity_React_MyReadsApp.git
+   cd myreadsapp
+   ```
+
+2.Install the dependencies:
 
 ```bash
-├── CONTRIBUTING.md
-├── README.md - This file.
-├── SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
-├── package.json # npm package manager file. It's unlikely that you'll need to modify this.
-├── public
-│   ├── favicon.ico # React Icon, You may change if you wish.
-│   └── index.html # DO NOT MODIFY
-└── src
-    ├── App.css # Styles for your app. Feel free to customize this as you desire.
-    ├── App.js # This is the root of your app. Contains static HTML right now.
-    ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
-    ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── icons # Helpful images for your app. Use at your discretion.
-    │   ├── add.svg
-    │   ├── arrow-back.svg
-    │   └── arrow-drop-down.svg
-    ├── index.css # Global styles. You probably won't need to change anything here.
-    └── index.js # You should not need to modify this file. It is used for DOM rendering only.
+npm install
 ```
 
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+3.Start the development server:
 
-## Backend Server
-
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
-
-- [`getAll`](#getall)
-- [`update`](#update)
-- [`search`](#search)
-
-### `getAll`
-
-Method Signature:
-
-```js
-getAll();
+```bash
+npm run dev
 ```
 
-- Returns a Promise which resolves to a JSON object containing a collection of book objects.
-- This collection represents the books currently in the bookshelves in your app.
+4.Open your browser and navigate to the local URL provided in your terminal (usually http://localhost:5173)
 
-### `update`
+📜 Available Scripts
+In the project directory, you can run the following scripts provided by Vite:
 
-Method Signature:
+    npm run dev: Starts the development server with Hot Module Replacement (HMR).
 
-```js
-update(book, shelf);
-```
+    npm run build: Builds the app for production to the dist folder. It bundles React in production mode and optimizes the build for the best performance.
 
-- book: `<Object>` containing at minimum an `id` attribute
-- shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]
-- Returns a Promise which resolves to a JSON object containing the response data of the POST request
+    npm run preview: Boots up a local static web server that serves the files from dist to preview your production build locally.
 
-### `search`
+    npm run lint: Runs ESLint to analyze your code and find potential errors or formatting issues.
 
-Method Signature:
+Project Structure
 
-```js
-search(query);
-```
-
-- query: `<String>`
-- Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
-- These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
-
-## Important
-
-The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
-
-## Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebook/create-react-app/blob/main/packages/cra-template/template/README.md).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+├── src/
+│ ├── api/ # API interaction logic (BooksAPI)
+│ ├── components/ # Reusable UI components (Book, BookShelfChanger, etc.)
+│ ├── context/ # React Context providers (if applicable)
+│ ├── pages/ # Route components (DashboardPage, SearchPage)
+│ ├── App.jsx # Main application layout and routing
+│ └── main.jsx # React DOM entry point
+├── public/ # Static assets
+├── package.json # Project metadata and dependencies
+└── vite.config.js # Vite configuration
