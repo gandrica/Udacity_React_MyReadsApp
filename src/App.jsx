@@ -25,7 +25,7 @@ function App() {
     };
     getAllBooks();
   }, []);
-
+  console.log(listBooks);
   return (
     <Routes>
       <Route
@@ -37,7 +37,7 @@ function App() {
       />
       <Route
         path="/search"
-        element={<SearchPage onUpdateBook={changeBookShelf} />}
+        element={<SearchPage onUpdateBook={changeBookShelf} list={listBooks} />}
       />
     </Routes>
   );

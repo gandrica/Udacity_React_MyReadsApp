@@ -43,7 +43,7 @@ npm install
 3.Start the development server:
 
 ```bash
-npm run dev
+npm run start
 ```
 
 4.Open your browser and navigate to the local URL provided in your terminal (usually http://localhost:5173)
@@ -69,5 +69,5 @@ Project Structure
 │ ├── App.jsx # Main application layout and routing
 │ └── main.jsx # React DOM entry point
 ├── public/ # Static assets
-├── package.json # Project metadata and dependencies
+├── package.json # Project metadata and dependencies  
 └── vite.config.js # Vite configuration

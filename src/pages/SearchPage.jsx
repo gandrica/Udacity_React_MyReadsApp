@@ -2,25 +2,40 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { search } from "../api/BooksAPI";
+import { useDebounce } from "../utils/useDebounce.js";
 
 import BooksGrid from "../components/BooksGrid";
 
-function SearchPage({ onUpdateBook }) {
+function SearchPage({ onUpdateBook, list }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const [searchListBooks, setSearchListBooks] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQueryBooks = async () => {
-      if (searchQuery === "") return;
-      else {
-        const queryBooks = await search(searchQuery, 14);
+      if (!debouncedSearchQuery) {
+        setSearchListBooks([]);
+        return;
+      }
+      const queryBooks = await search(debouncedSearchQuery, 100);
+      if (queryBooks.error) {
+        setSearchListBooks([]);
+      } else {
         setSearchListBooks(queryBooks);
       }
     };
     fetchQueryBooks();
-  }, [searchQuery]);
+  }, [debouncedSearchQuery]);
+
+  const booksWithShelves = searchListBooks.map((searchBook) => {
+    const bookInShelf = list.find((b) => b.id === searchBook.id);
+    return {
+      ...searchBook,
+      shelf: bookInShelf ? bookInShelf.shelf : "none",
+    };
+  });
 
   return (
     <div className="search-books">
@@ -38,7 +53,8 @@ function SearchPage({ onUpdateBook }) {
         </div>
       </div>
       <div className="search-books-results">
-        <BooksGrid list={searchListBooks} onUpdateBook={onUpdateBook} />
+        <p>{booksWithShelves?.length} books found!</p>
+        <BooksGrid list={booksWithShelves} onUpdateBook={onUpdateBook} />
       </div>
     </div>
   );

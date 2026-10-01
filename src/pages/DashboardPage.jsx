@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import Bookshelf from "../components/Bookshelf";
 
 function DashboardPage({ list, onUpdateBook }) {
@@ -7,7 +8,6 @@ function DashboardPage({ list, onUpdateBook }) {
   );
   const wantToReadBooks = list.filter((b) => b.shelf === "wantToRead");
   const readBooks = list.filter((b) => b.shelf === "read");
-  const navigate = useNavigate();
 
   return (
     <div className="list-books">
@@ -34,7 +34,7 @@ function DashboardPage({ list, onUpdateBook }) {
         </div>
       </div>
       <div className="open-search">
-        <a onClick={() => navigate("/search")}>Add a book</a>
+        <Link to="/search">Add a book</Link>
       </div>
     </div>
   );
