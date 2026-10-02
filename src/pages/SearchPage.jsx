@@ -14,11 +14,15 @@ function SearchPage({ onUpdateBook, list }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!searchQuery) {
+      setSearchListBooks([]);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
     const fetchQueryBooks = async () => {
-      if (!debouncedSearchQuery) {
-        setSearchListBooks([]);
-        return;
-      }
+      if (!debouncedSearchQuery) return;
+
       const queryBooks = await search(debouncedSearchQuery, 100);
       if (queryBooks.error) {
         setSearchListBooks([]);
@@ -29,13 +33,15 @@ function SearchPage({ onUpdateBook, list }) {
     fetchQueryBooks();
   }, [debouncedSearchQuery]);
 
-  const booksWithShelves = searchListBooks.map((searchBook) => {
-    const bookInShelf = list.find((b) => b.id === searchBook.id);
-    return {
-      ...searchBook,
-      shelf: bookInShelf ? bookInShelf.shelf : "none",
-    };
-  });
+  const booksWithShelves = searchListBooks
+    .filter((book) => book.imageLinks)
+    .map((searchBook) => {
+      const bookInShelf = list.find((b) => b.id === searchBook.id);
+      return {
+        ...searchBook,
+        shelf: bookInShelf ? bookInShelf.shelf : "none",
+      };
+    });
 
   return (
     <div className="search-books">
@@ -53,7 +59,11 @@ function SearchPage({ onUpdateBook, list }) {
         </div>
       </div>
       <div className="search-books-results">
-        <p>{booksWithShelves?.length} books found!</p>
+        <p>
+          {booksWithShelves?.length > 0
+            ? `${booksWithShelves.length} books found!`
+            : "Book not found."}
+        </p>
         <BooksGrid list={booksWithShelves} onUpdateBook={onUpdateBook} />
       </div>
     </div>

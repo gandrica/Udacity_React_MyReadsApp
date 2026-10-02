@@ -11,7 +11,7 @@ function Book({ book, onUpdateBook }) {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${imageLinks.thumbnail})`,
+              backgroundImage: `url(${imageLinks?.thumbnail})`,
             }}
           ></div>
           <BookShelfChanger book={book} onUpdateBook={onUpdateBook} />

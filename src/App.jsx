@@ -9,13 +9,13 @@ function App() {
   const [listBooks, setListBooks] = useState([]);
 
   const changeBookShelf = (bookToUpdate, newShelf) => {
-    bookToUpdate.shelf = newShelf;
+    const updatedBook = { ...bookToUpdate, shelf: newShelf };
 
-    setListBooks((prevBooks) => {
-      return prevBooks
-        .filter((book) => book.id !== bookToUpdate.id)
-        .concat(bookToUpdate);
-    });
+    setListBooks((prevBooks) =>
+      prevBooks
+        .filter((book) => book.id !== updatedBook.id)
+        .concat(updatedBook),
+    );
   };
 
   useEffect(() => {
