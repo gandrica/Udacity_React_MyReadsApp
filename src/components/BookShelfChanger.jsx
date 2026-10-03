@@ -29,7 +29,7 @@ function BookShelfChanger({ book, onUpdateBook }) {
           {book.shelf === "wantToRead" ? "✓" : ""} Want to Read
         </option>
         <option value="read">{book.shelf === "read" ? "✓" : ""} Read</option>
-        <option value="none">None</option>
+        <option value="none">{book.shelf === "none" ? "✓" : ""} None</option>
       </select>
     </div>
   );
